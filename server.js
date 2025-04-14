@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 const { UserController } = require("./controllers/UserController");
 const { CompanyController } = require("./controllers/CompanyController");
 const { ProductController } = require("./controllers/ProductController");
+const { SellController } = require("./controllers/SellController");
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -25,7 +26,9 @@ app.get("/", (req, res) => {
 //user
 //
 app.post("/api/user/signin", UserController.signIn);
-
+app.get("/api/user/info", UserController.info);
+app.get("/api/user/list", UserController.list);
+app.put("/api/user/update", UserController.update);
 //
 //company
 //
@@ -38,6 +41,10 @@ app.post("/api/buy/create",ProductController.create);
 app.get("/api/buy/list",ProductController.list);
 app.put("/api/buy/update/:id",ProductController.update);
 app.delete("/api/buy/remove/:id",ProductController.remove);
+//
+//sell
+//
+app.post("/api/sell/create",SellController.create);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
